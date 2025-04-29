@@ -49,7 +49,14 @@ class acmeapi_plugin
 
     public function onLoad(): void
     {
-        global $app;
+        global $app,$conf;
+
+        $app->plugin->registerEvent('admin:server_config:on_after_formdef', $this->plugin_name, 'server_config_form');
+
+        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');
+        if ($settings['plugin_acmeapi_enabled'] != 'y') {
+            return;
+        }
 
         if ($this->checkDbColumnExist()) {
             $app->plugin->registerEvent('dns:dns_soa:on_after_formdef', $this->plugin_name, 'dns_soa_form');
@@ -59,15 +66,88 @@ class acmeapi_plugin
         }
     }
 
-    public function dns_soa_form($event_name, $page_form): void
+    public function server_config_form($event_name, $page_form): void
     {
         $this->loadLang($page_form);
 
+        $tabs = array(
+            'plugin_acmeapi' => array(
+                'title' => 'AMCEAPI (Plugin)',
+                'width' => 100,
+                'template' => $this->plugin_dir . '/templates/plugin_acmeapi_server_config_edit.htm',
+                'fields' => array(
+                    'plugin_acmeapi_enabled' => array(
+                        'datatype' => 'VARCHAR',
+                        'formtype' => 'CHECKBOX',
+                        'default' => 'n',
+                        'value' => array(
+                            1 => 'y',
+                            0 => 'n'
+                        )
+                    ),
+                    'plugin_acmeapi_url' => array(
+                        'datatype' => 'VARCHAR',
+                        'formtype' => 'TEXT',
+                        'filters' => array(
+                            0 => array(
+                                'event' => 'SAVE',
+                                'type' => 'TRIM'
+                            )
+                        ),
+                        'default' => '',
+                        'value' => '',
+                        'maxlength' => '255'
+                    ),
+                    'plugin_acmeapi_help_url' => array(
+                        'datatype' => 'VARCHAR',
+                        'formtype' => 'TEXT',
+                        'filters' => array(
+                            0 => array(
+                                'event' => 'SAVE',
+                                'type' => 'TRIM'
+                            )
+                        ),
+                        'default' => '',
+                        'value' => '',
+                        'maxlength' => '255'
+                    ),
+                    'plugin_acmeapi_help_url_text' => array(
+                        'datatype' => 'VARCHAR',
+                        'formtype' => 'TEXT',
+                        'filters' => array(
+                            0 => array(
+                                'event' => 'SAVE',
+                                'type' => 'TRIM'
+                            )
+                        ),
+                        'default' => '',
+                        'value' => '',
+                        'maxlength' => '255'
+                    ),
+                )
+            )
+        );
+
+        $this->insert($tabs, $page_form);
+    }
+    public function dns_soa_form($event_name, $page_form): void
+    {
+
+
+        global $app,$conf;
+        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');
+        //Workaround to get info to tpl
+        $addWB['plugin_acmeapi_url'] = $settings['plugin_acmeapi_url'];
+        $addWB['plugin_acmeapi_help_url'] = $settings['plugin_acmeapi_help_url'];
+        $addWB['plugin_acmeapi_help_url_text'] = $settings['plugin_acmeapi_help_url_text'];
+
+        $this->loadLang($page_form,$addWB);
+
         $tabs = array (
             'plugin_acmeapi' => array(
-            'title'  => "Plugin ACME api",
+            'title'  => "AMCEAPI (Plugin)",
             'width'  => 100,
-            'template'  => $this->plugin_dir . '/templates/acmeapi_plugin_soa_edit_tab.htm',
+            'template'  => $this->plugin_dir . '/templates/plugin_acmeapi_soa_edit_tab.htm',
             'fields'  => array (
                 'plugin_acmeapi_key' => array (
                     'datatype' => 'VARCHAR',
@@ -87,7 +167,7 @@ class acmeapi_plugin
             'plugin_acmeapi' => array(
                 'title'  => "Plugin ACME api",
                 'width'  => 100,
-                'template'  => $this->plugin_dir . '/templates/acmeapi_plugin_soa_edit_tab_notready.htm',
+                'template'  => $this->plugin_dir . '/templates/plugin_acmeapi_soa_edit_tab_notready.htm',
             ));
 
         $this->insert($tabs, $page_form);
@@ -158,7 +238,7 @@ class acmeapi_plugin
     }
 
 
-    private function loadLang($page_form): void
+    private function loadLang($page_form,$addwb=null): void
     {
         global $app, $conf;
 
@@ -172,6 +252,9 @@ class acmeapi_plugin
         }
 
         @include $file;
+        if (is_array($addwb)) {
+            $wb = array_merge($wb, $addwb); // work around to get url texts into template
+        }
         if (isset($page_form->wordbook) && isset($wb) && is_array($wb)) {
 
             if (is_array($page_form->wordbook)) {

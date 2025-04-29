@@ -3,3 +3,16 @@ $wb['plugin_acmeapi_key_txt'] = 'ACME api key';
 $wb['plugin_acmeapi_key_unavailable_txt'] = 'No ACME api key exists';
 $wb['plugin_acmeapi_key_create_key_txt'] = 'Create a new ACME api key';
 $wb['plugin_acmeapi_key_delete_key_txt'] = 'Delete the ACME api key';
+
+$wb['plugin_acmeapi_logoutlogin_txt'] = 'You need to logout and login to get the changes active';
+
+$wb['plugin_acmeapi_url_txt'] = 'ACMEAPI URL';
+$wb['plugin_acmeapi_url_desc_txt'] = 'Full URL of the plugin_acmeapi.php file like: https://yourserver:8080/remote/plugin_acmeapi.php';
+$wb['plugin_acmeapi_enabled_txt'] = 'Enabled (Interface)';
+
+$wb['plugin_acmeapi_help_url_txt'] = 'ACMEAPI HELP URL';
+$wb['plugin_acmeapi_help_url_desc_txt'] = 'Full URL of the help site where the user get more instructions to use the api';
+
+$wb['plugin_acmeapi_help_url_text_txt'] = 'ACMEAPI HELP URL TEXT';
+$wb['plugin_acmeapi_help_url_desc_text_txt'] = 'Some Text for the help Link';
+

@@ -1,8 +1,7 @@
 <h4>Database update missing</h4><br>
 
 <pre>
-ALTER TABLE `dns_soa` ADD `plugin_acmeapi_key` VARCHAR(50) NULL AFTER `rendered_zone`;
-ALTER TABLE `dns_soa`ADD CONSTRAINT UNIQUE(`plugin_acmeapi_key`);
+ALTER TABLE `dns_soa` ADD COLUMN IF NOT EXISTS `plugin_acmeapi_key` VARCHAR(50) NULL;
 </pre>
 <input type="hidden" name="id" value="{tmpl_var name='id'}">
 
