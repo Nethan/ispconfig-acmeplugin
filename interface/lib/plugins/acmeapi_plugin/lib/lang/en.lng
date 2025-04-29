@@ -1,0 +1,5 @@
+<?php
+$wb['plugin_acmeapi_key_txt'] = 'ACME api key';
+$wb['plugin_acmeapi_key_unavailable_txt'] = 'No ACME api key exists';
+$wb['plugin_acmeapi_key_create_key_txt'] = 'Create a new ACME api key';
+$wb['plugin_acmeapi_key_delete_key_txt'] = 'Delete the ACME api key';

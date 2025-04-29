@@ -1,0 +1,15 @@
+<h4>Database update missing</h4><br>
+
+<pre>
+ALTER TABLE `dns_soa` ADD `plugin_acmeapi_key` VARCHAR(50) NULL AFTER `rendered_zone`;
+ALTER TABLE `dns_soa`ADD CONSTRAINT UNIQUE(`plugin_acmeapi_key`);
+</pre>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+<div class="clear">
+    <div class="right">
+        <button class="btn btn-default formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-load-content="dns/dns_soa_list.php">Exit</button>
+    </div>
+</div>
+
+
