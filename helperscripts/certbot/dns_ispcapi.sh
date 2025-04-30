@@ -43,7 +43,7 @@ if [ "$TASK" = "auth" ]; then
                 -H "Auth-Token: $APIKEY" \
                 -d '{"domain": "_acme-challenge.'$CERTBOT_DOMAIN'", "txt":"'$CERTBOT_VALIDATION'"}'`
         echo $DNSURL
-        sleep 20
+        sleep 70
 fi
 if [ "$TASK" = "cleanup" ]; then
         DNSURL=`curl -s -X DELETE $APIURL."/records?domain=_acme-challenge.$CERTBOT_DOMAIN" \

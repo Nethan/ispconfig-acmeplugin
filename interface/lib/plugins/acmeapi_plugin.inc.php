@@ -165,7 +165,7 @@ class acmeapi_plugin
 
         $tabs = array (
             'plugin_acmeapi' => array(
-                'title'  => "Plugin ACME api",
+                'title'  => "AMCEAPI (Plugin)",
                 'width'  => 100,
                 'template'  => $this->plugin_dir . '/templates/plugin_acmeapi_soa_edit_tab_notready.htm',
             ));
@@ -189,7 +189,6 @@ class acmeapi_plugin
         } else {
             die("No valid task given - exiting"); // should never happen...
         }
-        //echo "sddssdsdsdsdsd0".$newApiKey;exit;
         $page_form->dataRecord['plugin_acmeapi_key'] = $newApiKey;
     }
 
