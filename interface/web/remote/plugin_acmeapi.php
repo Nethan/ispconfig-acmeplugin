@@ -65,6 +65,7 @@ function delete_record($record, $key) {
     // If no Zone with key found
     if (!(is_numeric($zone_id))) {
         echo json_encode(["message" => "FAIL - No zone found or key wrong"]);
+        exit;
     }
 
     $apikey = $zone_rec['plugin_acmeapi_key'];
@@ -83,6 +84,7 @@ function delete_record($record, $key) {
 
     if (!(is_numeric($recordId))) {
         echo json_encode(["message" => "FAIL - No Record found"]);
+        exit;
     }
 
     try{
@@ -90,7 +92,6 @@ function delete_record($record, $key) {
         $client->logout($session_id);
     } catch (SoapFault $e) {
         die('SOAP Error: ' . $e->getMessage());
-        echo "Please contact the server administator";
     }
 }
 
@@ -120,6 +121,7 @@ function create_record($record,$txt,$key) {
     // If no Zone with key found
     if (!(is_numeric($zone_id))) {
         echo json_encode(["message" => "FAIL - No Zone found or Key wrong"]);
+        exit;
     }
 
     $client_id = $client->client_get_id($session_id, $zone_rec['sys_userid']);
@@ -148,7 +150,6 @@ function create_record($record,$txt,$key) {
 
     } catch (SoapFault $e) {
         die('SOAP Error: ' . $e->getMessage());
-        echo "Please contact the server administator";
     }
 }
 function apiConnect () {
@@ -172,7 +173,6 @@ function apiConnect () {
         }
     } catch (SoapFault $e) {
         die('SOAP Error: ' . $e->getMessage());
-        echo "Please contact the server administator";
     }
     return ["session_id" => $session_id, "client" => $client ];
 }
