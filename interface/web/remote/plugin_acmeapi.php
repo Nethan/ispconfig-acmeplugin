@@ -15,7 +15,7 @@ if (isset($_SERVER['HTTP_AUTH_TOKEN'])) {
     $authHeader = $_SERVER['HTTP_AUTH_TOKEN'];
     $key = $authHeader;
 } else {
-    echo json_encode(["message" => "FAIL - No API Key 1"]);
+    echo json_encode(["message" => "FAIL - No API Key "]);
     exit;
 }
 
