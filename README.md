@@ -24,7 +24,8 @@ On your server
 cd /tmp
 git clone https://github.com/Nethan/ispconfig-acmeplugin.git
 cd ispconfig-acmeplugin
-# the ispconfig pluing
+
+# the ispconfig pluging
 cp -Ri interface/lib/plugins/acmeapi_plugin /usr/local/ispconfig/interface/lib/plugins/
 cp -i interface/lib/plugins/acmeapi_plugin.inc.php /usr/local/ispconfig/interface/lib/plugins/
 chown ispconfig:ispconfig /usr/local/ispconfig/interface/lib/plugins/acmeapi_plugin.inc.php
