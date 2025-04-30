@@ -7,8 +7,6 @@ Author: Johannes Koschier <hannes@cheat.at>
 
 ########  Public functions #####################
 
-export ACME_DNS_TIMEOUT=4
-
 dns_ispcapi_add() {
   fulldomain=$1
   txtvalue=$2
