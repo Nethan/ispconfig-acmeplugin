@@ -71,7 +71,7 @@ wget https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/ma
 export ISPCAPI_URL=https://yourserver.xx:8080/remote/plugin_acmeapi.php
 export ISPCAPI_KEY=xxxxxxxxxxxxxxxxxxx
 
-#Test a cert (staging) dnssleep to allow ispconfig to write the config and dns to propagate
+#Test a cert (staging) set dnssleep to allow ispconfig to write the config and dns to propagate
 acme.sh --issue --staging --debug 2 -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 
 #Create a real cert
