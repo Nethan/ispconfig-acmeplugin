@@ -179,6 +179,7 @@ class acmeapi_plugin
     public function dns_soa_form_on_before_update($event_name, $page_form): void {
         global $app;
 
+
         if (! isset($_GET['acmetask'])) { // ignore all other tabs
             return;
         }
