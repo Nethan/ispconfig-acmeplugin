@@ -1,6 +1,5 @@
 <?php
 
-
 define('USERNAME', 'ispconfigremoteuser');
 define('PASSWORD', 'XXXchangemeXXX');
 define('SOAP_LOCATION', 'https://localhost:8080/remote/index.php');
@@ -56,7 +55,7 @@ function delete_record($record, $key) {
             $zone_id = $client->dns_zone_get_id($session_id, $zone);
             $zone_rec = $client->dns_zone_get($session_id, $zone_id);
             $apikey = $zone_rec['plugin_acmeapi_key'];
-        } catch (SoapFault $e) { echo 'SOAP Error: ' . $e->getMessage(); }
+        } catch (SoapFault $e) { }
         if ($apikey == $key) { // found deepest Zone
             break;
         }
@@ -67,9 +66,6 @@ function delete_record($record, $key) {
     if (!(is_numeric($zone_id))) {
         echo json_encode(["message" => "FAIL - No zone found or key wrong"]);
     }
-
-    $client_id = $client->client_get_id($session_id, $zone_rec['sys_userid']);
-    $server_id = $zone_rec['server_id'];
 
     $apikey = $zone_rec['plugin_acmeapi_key'];
     if ($apikey != $key) { //check again
@@ -135,6 +131,7 @@ function create_record($record,$txt,$key) {
         exit;
     }
     try{
+        $mydate = date("Y-m-d H:i:s");
         $params = [
             'server_id' => $server_id,
             'zone' => $zone_id,
@@ -144,6 +141,7 @@ function create_record($record,$txt,$key) {
             'ttl' => '900',
             'aux' => '10',
             'active' => 'y',
+            'stamp' => $mydate,
         ];
         $client->dns_txt_add($session_id, $client_id, $params, true);
         $client->logout($session_id);

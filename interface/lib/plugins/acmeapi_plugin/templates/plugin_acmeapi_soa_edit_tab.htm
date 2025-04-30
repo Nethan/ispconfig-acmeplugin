@@ -8,23 +8,33 @@ API URL:
 </pre>
 <br>
 <div class="alert alert-info text-center">
-        <b><a href="{tmpl_var name='plugin_acmeapi_help_url'}" target="_blank">{tmpl_var name='plugin_acmeapi_help_url_text'}</a></b>
+    <b><a href="{tmpl_var name='plugin_acmeapi_help_url'}" target="_blank">{tmpl_var
+        name='plugin_acmeapi_help_url_text'}</a></b>
 </div>
 
 <hr>
-<button class="btn btn-default formbutton-success" type="button" value="{tmpl_var name='btn_delete_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_soa_edit.php?acmetask=delete&next_tab=plugin_acmeapi">{tmpl_var name='plugin_acmeapi_key_delete_key_txt'}</button>
+<button class="btn btn-default formbutton-success" data-form-action="dns/dns_soa_edit.php?acmetask=delete&next_tab=plugin_acmeapi" data-submit-form="pageForm"
+        type="button" value="{tmpl_var name='btn_delete_txt'}">
+    {tmpl_var name='plugin_acmeapi_key_delete_key_txt'}
+</button>
 
 {tmpl_else}
 <pre>{tmpl_var name='plugin_acmeapi_key_unavailable_txt'}</pre>
 <hr>
-<button class="btn btn-default formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=plugin_acmeapi&acmetask=create">{tmpl_var name='plugin_acmeapi_key_create_key_txt'}</button>
+<button class="btn btn-default formbutton-success" data-form-action="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=plugin_acmeapi&acmetask=create" data-submit-form="pageForm"
+        type="button"
+        value="{tmpl_var name='btn_save_txt'}">
+    {tmpl_var name='plugin_acmeapi_key_create_key_txt'}
+</button>
 {/tmpl_if}
-<input type="hidden" name="id" value="{tmpl_var name='id'}">
-<input type="hidden" name="acmetab" value="yes">
+<input name="id" type="hidden" value="{tmpl_var name='id'}">
+<input name="acmetab" type="hidden" value="yes">
 
 <div class="clear">
     <div class="right">
-        <button class="btn btn-default formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-load-content="dns/dns_soa_list.php">Exit</button>
+        <button class="btn btn-default formbutton-default" data-load-content="dns/dns_soa_list.php" type="button"
+                value="{tmpl_var name='btn_cancel_txt'}">Exit
+        </button>
     </div>
 </div>
 

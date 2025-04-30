@@ -53,7 +53,7 @@ class acmeapi_plugin
 
         $app->plugin->registerEvent('admin:server_config:on_after_formdef', $this->plugin_name, 'server_config_form');
 
-        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');
+        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');  //maybe this is wrong in multiserver env
         if ($settings['plugin_acmeapi_enabled'] != 'y') {
             return;
         }
@@ -132,10 +132,8 @@ class acmeapi_plugin
     }
     public function dns_soa_form($event_name, $page_form): void
     {
-
-
         global $app,$conf;
-        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');
+        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi'); //$conf['server_id'] - multiserver?
         //Workaround to get info to tpl
         $addWB['plugin_acmeapi_url'] = $settings['plugin_acmeapi_url'];
         $addWB['plugin_acmeapi_help_url'] = $settings['plugin_acmeapi_help_url'];
@@ -173,26 +171,6 @@ class acmeapi_plugin
         $this->insert($tabs, $page_form);
     }
 
-    /*
-    public function dns_soa_form_on_before_update_disabled($event_name, $page_form): void {
-        global $app;
-        //print_r($_GET);exit;
-
-        if (!isset($_GET['acmetask'])) {
-            return; //Not the ACME Tab
-        }
-
-        if ($_GET['acmetask'] == 'create') {
-            $newApiKey = bin2hex(random_bytes(16)); //32 chars long
-        } elseif ($_GET['acmetask'] == 'delete') {
-            $newApiKey = NULL;
-        } else {
-            die("No valid task given - exiting"); // should never happen...
-        }
-        $page_form->dataRecord['plugin_acmeapi_key'] = $newApiKey;
-    }
-
-    */
     public function dns_soa_form_on_before_update($event_name, $page_form): void {
         global $app;
 
@@ -217,7 +195,6 @@ class acmeapi_plugin
             die("No valid task given - exiting");
         }
 
-
         $sql = "UPDATE `dns_soa` SET `plugin_acmeapi_key` = ? WHERE `dns_soa`.`id` = ?";
         $app->db->query($sql, $newApiKey, $domain_id); //Insert into dns_soa table
         header("Location: /dns/dns_soa_edit.php?next_tab=plugin_acmeapi&id=$domain_id");
@@ -235,7 +212,6 @@ class acmeapi_plugin
         }
         return true;
     }
-
 
     private function loadLang($page_form,$addwb=null): void
     {
