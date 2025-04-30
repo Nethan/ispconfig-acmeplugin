@@ -65,7 +65,7 @@ class acmeapi_plugin
 
         $tabs = array(
             'plugin_acmeapi' => array(
-                'title' => 'AMCEAPI (Plugin)',
+                'title' => 'ACMEAPI (Plugin)',
                 'width' => 100,
                 'template' => $this->plugin_dir . '/templates/plugin_acmeapi_server_config_edit.htm',
                 'fields' => array(
@@ -148,7 +148,7 @@ class acmeapi_plugin
 
         $tabs = array (
             'plugin_acmeapi' => array(
-            'title'  => "AMCEAPI (Plugin)",
+            'title'  => "ACMEAPI (Plugin)",
             'width'  => 100,
             'template'  => $this->plugin_dir . '/templates/plugin_acmeapi_soa_edit_tab.htm',
             'fields'  => array (
@@ -168,7 +168,7 @@ class acmeapi_plugin
 
         $tabs = array (
             'plugin_acmeapi' => array(
-                'title'  => "AMCEAPI (Plugin)",
+                'title'  => "ACMEAPI (Plugin)",
                 'width'  => 100,
                 'template'  => $this->plugin_dir . '/templates/plugin_acmeapi_soa_edit_tab_notready.htm',
             ));

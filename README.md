@@ -102,7 +102,7 @@ certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh aut
 ```
 
 ## Limits
-- `Multiple SANs in difference zones (like -d mail.domain1.xx -d mail.domain2.xx) not possible (need to modify certbot/acme.sh script for this)`
+- `Multiple SANs in difference zones (like -d mail.domain1.xx -d mail.domain2.xx) not possible (need to modify certbot/acme.sh plugin scripts for this)`
 
 
 ## Windows Client
