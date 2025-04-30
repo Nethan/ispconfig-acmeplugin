@@ -77,6 +77,7 @@ acme.sh --issue --staging --debug 2 -d yourdomain.xx --dnssleep 70 --dns dns_isp
 #Create a real cert
 acme.sh --issue -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 acme.sh --issue -d vpn.yourdomain.xx -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
+acme.sh --issue -d *.yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 
 ```
 
@@ -96,8 +97,13 @@ certbot --dry-run certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispc
 #Create a Cert (waits 70 second (for every SAN) for DNS propagate
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx'
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx' -d 'vpn.yourdomain.xx' -d 'mail.yourdomain.xx'
+certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx' -d '*.yourdomain.xx'
 
 ```
+
+## Limits
+- `Multiple SANs in difference zones (like -d mail.domain1.xx -d mail.domain2.xx) not possible (need to modify certbot/acme.sh script for this)`
+
 
 ## Windows Client
 
