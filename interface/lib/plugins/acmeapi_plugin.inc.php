@@ -38,8 +38,6 @@ class acmeapi_plugin
     public string $class_name = 'acmeapi_plugin';
 
     public string $plugin_dir;
-    private string $tableName = 'dns_soa';
-    private string $keyColumnName = 'plugin_acme_api_key';
 
     public function __construct()
     {
@@ -52,11 +50,6 @@ class acmeapi_plugin
         global $app,$conf;
 
         $app->plugin->registerEvent('admin:server_config:on_after_formdef', $this->plugin_name, 'server_config_form');
-
-        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi');  //maybe this is wrong in multiserver env
-        if ($settings['plugin_acmeapi_enabled'] != 'y') {
-            return;
-        }
 
         if ($this->checkDbColumnExist()) {
             $app->plugin->registerEvent('dns:dns_soa:on_after_formdef', $this->plugin_name, 'dns_soa_form');
@@ -133,8 +126,20 @@ class acmeapi_plugin
     public function dns_soa_form($event_name, $page_form): void
     {
         global $app,$conf;
-        $settings = $app->getconf->get_server_config($conf['server_id'],'plugin_acmeapi'); //$conf['server_id'] - multiserver?
-        //Workaround to get info to tpl
+
+        //Workaround - get zone id
+        $zone_id = $app->functions->intval(@$_REQUEST['id']);
+
+        //Get Server ID from $zone_id
+        $tmp = $app->db->queryOneRecord("SELECT server_id FROM dns_soa WHERE id = ?", $zone_id);
+        $server_id = $tmp["server_id"];
+
+        $settings = $app->getconf->get_server_config($server_id,'plugin_acmeapi');
+        if ($settings['plugin_acmeapi_enabled'] != 'y') {
+            return;
+        }
+
+        //Workaround to get info into tpl - no access to tpl from plugin
         $addWB['plugin_acmeapi_url'] = $settings['plugin_acmeapi_url'];
         $addWB['plugin_acmeapi_help_url'] = $settings['plugin_acmeapi_help_url'];
         $addWB['plugin_acmeapi_help_url_text'] = $settings['plugin_acmeapi_help_url_text'];
