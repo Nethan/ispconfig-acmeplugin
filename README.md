@@ -61,8 +61,8 @@ rm -rf /tmp/ispconfig-acmeplugin
 
 
 ## acme.sh
-- Download the dns plugin script for acme.sh into /root/.acme.sh/dnsapi (if default installation)
 ```bash
+# Download the dns plugin script for acme.sh into /root/.acme.sh/dnsapi (if default installation)
 cd /root/.acme.sh/dnsapi
 wget https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/acme.sh/dns_ispcapi.sh
 
@@ -73,23 +73,25 @@ export ISPCAPI_KEY=xxxxxxxxxxxxxxxxxxx
 #Test a cert (staging) dnssleep to allow ispconfig to write the config and dns to propagate
 acme.sh --issue --staging --debug 2 -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 
-#Create a real Cert
+#Create a real cert
 acme.sh --issue -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 acme.sh --issue -d vpn.yourdomain.xx -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 
 ```
 
 ## certbot
-- Download the dns plugin script for certbot into a folder (/usr/local/sbin as example)
 ```bash
+# Download the dns plugin script for certbot into a folder (/usr/local/sbin as example)
 cd /usr/local/sbin
 wget https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/certbot/dns_ispcapi.sh
 chmod 700 /usr/local/sbin/dns_ispcapi.sh
 
 # edit the `/usr/local/sbin/dns_ispcapi.sh` and enter the URL and the key
 vi /usr/local/sbin/dns_ispcapi.sh 
+
 #Test it
 certbot --dry-run certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx'
+
 #Create a Cert (waits 70 second (for every SAN) for DNS propagate
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx'
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx' -d 'vpn.yourdomain.xx' -d 'mail.yourdomain.xx'
