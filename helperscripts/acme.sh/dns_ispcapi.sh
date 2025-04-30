@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# @file        dns_ispcapi.sh
-# @author      Johannes Koschier <hannes@cheat.at>
-
 # shellcheck disable=SC2034
 dns_ispcapi_info='ISPCONFIG Plugin acmeapi
 Author: Johannes Koschier <hannes@cheat.at>
@@ -22,8 +19,6 @@ dns_ispcapi_add() {
   ISPCAPI_KEY_NAME="ISPCAPI_KEY$fqdnmd5sum"
   ISPCAPI_URL_NAME="ISPCAPI_URL$fqdnmd5sum"
 
-
-
   ISPCAPI_KEY="${ISPCAPI_KEY:-$(_readaccountconf_mutable ISPCAPI_KEY_NAME)}"
   ISPCAPI_URL="${ISPCAPI_URL:-$(_readaccountconf_mutable ISPCAPI_URL_NAME)}"
   if [ -z "$ISPCAPI_KEY" ] || [ -z "$ISPCAPI_URL" ]; then
@@ -36,9 +31,6 @@ dns_ispcapi_add() {
   _saveaccountconf_mutable $ISPCAPI_URL_NAME "$ISPCAPI_URL"
   _saveaccountconf_mutable $ISPCAPI_KEY_NAME "$ISPCAPI_KEY"
 
-        _debug XXXXXXXXXXXXXXXXXXXX
-        _debug $ISPCAPI_URL
-        _debug $ISPCAPI_URL_NAME
   _debug "Adding record: $fulldomain = $txtvalue"
 
   # Prepare JSON payload

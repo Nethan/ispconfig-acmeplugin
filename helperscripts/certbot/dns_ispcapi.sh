@@ -5,10 +5,10 @@
 # @author      Johannes Koschier <hannes@cheat.at>
 #
 
-
 # API token
 APIKEY="<<<enter your api key>>>"
 APIURL="<<<enter the api URL>>>>"
+
 TASK=$1;
 if [ "$TASK" = "auth" ]; then
         DNSURL=`curl -s -X POST "$APIURL/records" \
