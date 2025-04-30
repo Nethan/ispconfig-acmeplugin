@@ -127,7 +127,7 @@ class acmeapi_plugin
     {
         global $app,$conf;
 
-        //Workaround - get zone id
+        //Workaround  - get zone id
         $zone_id = $app->functions->intval(@$_REQUEST['id']);
 
         //Get Server ID from $zone_id
