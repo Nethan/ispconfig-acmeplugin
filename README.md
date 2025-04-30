@@ -56,7 +56,6 @@ rm -rf /tmp/ispconfig-acmeplugin
 # Use the Plugin
  - create a api key in your zone `DNS > Zones > Select Zone > TAB ACME (Plugin)`
 
-!!! Logout and Login to get the plugin active !!!
 
 ## acme.sh
 - Download the dns plugin script for acme.sh into /root/.acme.sh/dnsapi (if default installation)
@@ -93,9 +92,16 @@ certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh aut
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx' -d 'vpn.yourdomain.xx' -d 'mail.yourdomain.xx'
 
 ```
+
+## Windows Client
+
+ToDo..
+
+
 ## Screenshot
 
 ![Admin](/screenshot/admin.jpg)
+
 
 ![User](/screenshot/user.jpg)
 
