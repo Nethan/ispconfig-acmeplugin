@@ -46,15 +46,18 @@ chmod 640 /usr/local/ispconfig/interface/web/remote/plugin_acmeapi.php
 rm -rf /tmp/ispconfig-acmeplugin
 ```
 
+---
+
 ## Configuration
 
-- Create a remote user with following permission `DNS zone function`, `Client function` and `DNS txt function` 
-- Edit `/usr/local/ispconfig/interface/web/remote/plugin_acmeapi.php` and insert the created user/password. Edit the URL if necessary. 
+- Create a remote user (ISPConfig interface) with following permission `DNS zone function`, `Client function` and `DNS txt function` 
+- Edit `/usr/local/ispconfig/interface/web/remote/plugin_acmeapi.php` and insert the created user/password of the remote user and edit the URL if necessary. 
 - Config `System > Server Config > Your Server Name > TAB ACME (Plugin)` with your data and enable it.
 
+---
 
 # Use the Plugin
- - create a api key in your zone `DNS > Zones > Select Zone > TAB ACME (Plugin)`
+ - create an api key in your zone `DNS > Zones > Select Zone > TAB ACME (Plugin)`
 
 
 ## acme.sh
@@ -97,6 +100,7 @@ certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh aut
 
 ToDo..
 
+---
 
 # Screenshot
 
