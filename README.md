@@ -12,7 +12,7 @@ Allow users to create an api key to use dns auth for acme.sh/certbot
 ## Installation
 
 Update the ispconfig Database (dbispconfig):
-```mysql
+```
 ALTER TABLE `dns_soa` ADD COLUMN IF NOT EXISTS `plugin_acmeapi_key` VARCHAR(50) NULL;
 ```
 On your server 
@@ -50,7 +50,7 @@ rm -rf /tmp/ispconfig-acmeplugin
 - Download the dns plugin script for acme.sh into /root/.acme.sh/dnsapi (if default installation)
 ```bash
 cd /root/.acme.sh/dnsapi
-wget https://github.com/Nethan/ispconfig-acmeplugin/helperscripts/acme.sh/dns_ispcapi.sh
+wget https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/acme.sh/dns_ispcapi.sh
 
 # export the key and url (replace with your url and key)
 export ISPCAPI_URL=https://yourserver.xx:8080/remote/plugin_acmeapi.php
@@ -68,7 +68,7 @@ acme.sh --issue -d yourdomain.xx --dnssleep 70 --dns dns_ispcapi
 - Download the dns plugin script for certbot into a folder (/usr/local/sbin as example)
 ```bash
 cd /usr/local/sbin
-wget https://github.com/Nethan/ispconfig-acmeplugin/helperscripts/certbot/dns_ispcapi.sh
+wget https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/certbot/dns_ispcapi.sh
 chmod 700 /usr/local/sbin/dns_ispcapi.sh
 
 # edit the `/usr/local/sbin/dns_ispcapi.sh` and enter the URL and the key
