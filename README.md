@@ -2,6 +2,8 @@
 
 Allow users to create an api key to use dns auth for acme.sh/certbot
 
+!! Still in Beta/Testing !!
+
 ## Features
 - `System > Server Config > Your Server Name > TAB ACME (Plugin)`
 - `DNS > Zones > Select Zone > TAB ACME (Plugin)`
