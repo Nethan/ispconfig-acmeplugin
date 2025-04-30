@@ -23,17 +23,17 @@ cd /tmp
 git clone https://github.com/Nethan/ispconfig-acmeplugin.git
 cd ispconfig-acmeplugin
 # the ispconfig pluing
-cp -Ri interface/lib/acmeapi_plugin /usr/local/ispconfig/interface/lib/
-cp -i interface/lib/acmeapi_plugin/acmeapi_plugin.inc.php /usr/local/ispconfig/interface/lib/
-chown ispconfig:ispconfig /usr/local/ispconfig/interface/lib/acmeapi_plugin.inc.php
-chmod 640 /usr/local/ispconfig/interface/lib/acmeapi_plugin.inc.php
-chown -R ispconfig:ispconfig /usr/local/ispconfig/interface/lib/acmeapi_plugin
-chmod -R 640 /usr/local/ispconfig/interface/lib/acmeapi_plugin
+cp -Ri interface/lib/plugins/acmeapi_plugin /usr/local/ispconfig/interface/lib/plugins/
+cp -i interface/lib/plugins/acmeapi_plugin.inc.php /usr/local/ispconfig/interface/lib/plugins/
+chown ispconfig:ispconfig /usr/local/ispconfig/interface/lib/plugins/acmeapi_plugin.inc.php
+chmod 640 /usr/local/ispconfig/interface/lib/plugins/acmeapi_plugin.inc.php
+chown -R ispconfig:ispconfig /usr/local/ispconfig/interface/lib/plugins/acmeapi_plugin
+chmod -R 640 /usr/local/ispconfig/interface/lib/plugins/acmeapi_plugin
 
 ## the api itself - you can put it everywhere - default into the ispconfig installation
-cp -i interface/web/remote/plugin-acmeapi.php /usr/local/ispconfig/interface/remote/
-chown ispconfig:ispconfig /usr/local/ispconfig/web/interface/remote/plugin-acmeapi.php
-chmod 640 /usr/local/ispconfig/web/interface/remote/plugin-acmeapi.php
+cp -i interface/web/remote/plugin_acmeapi.php /usr/local/ispconfig/interface/web/remote/
+chown ispconfig:ispconfig /usr/local/ispconfig/interface/web/remote/plugin_acmeapi.php
+chmod 640 /usr/local/ispconfig/interface/web/remote/plugin_acmeapi.php
 
 rm -rf /tmp/ispconfig-acmeplugin
 ```
