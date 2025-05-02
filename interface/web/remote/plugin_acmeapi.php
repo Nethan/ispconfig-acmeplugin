@@ -176,6 +176,4 @@ function apiConnect () {
     }
     return ["session_id" => $session_id, "client" => $client ];
 }
-
-
 ?>;
