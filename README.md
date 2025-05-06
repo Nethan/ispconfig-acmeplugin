@@ -100,37 +100,59 @@ certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh aut
 certbot certonly --manual --manual-auth-hook "/usr/local/sbin/dns_ispcapi.sh auth"  --manual-cleanup-hook "/usr/local/sbin/dns_ispcapi.sh cleanup" --agree-tos --email xxx@yourdomain.xx --preferred-challenges=dns -d 'yourdomain.xx' -d '*.yourdomain.xx'
 
 ```
+## win-acme (Windows) [Website](https://www.win-acme.com/)
 
-## Limits
-- `Multiple SANs in difference zones (like -d mail.domain1.xx -d mail.domain2.xx) not possible (need to modify certbot/acme.sh plugin scripts for this)`
+### Installation and Setup
 
+1. **Download and install win-acme:**  
+   [Getting Started Guide](https://www.win-acme.com/manual/getting-started)  
+   Example installation path:  
+   `C:\Programme\win-acme\`
 
-## win-acme (Windows) [Win acme](https://www.win-acme.com/)
+2. **Download the DNS authentication plugin script:**  
+   [ispcDNS.ps1](https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/win-acme/ispcDNS.ps1)  
+   Place it in the scripts folder:  
+   `C:\Programme\win-acme\Scripts\`
 
-- Download and install win-acme [Docu](https://www.win-acme.com/manual/getting-started)
-- Example into C:\Programme\win-acme\
-- Download dns-auth [plugin script](https://raw.githubusercontent.com/Nethan/ispconfig-acmeplugin/refs/heads/master/helperscripts/win-acme/ispcDNS.ps1)  for win-acme and put it into the scripts (C:\Programme\win-acme\Scripts) folder
+---
 
-Example to create a certificate (powershell script)
+### Example: Generate a Certificate (PowerShell)
+
+#### Staging (Test Certificate)
 ```powershell
-#staging
 C:\Programme\win-acme\wacs.exe --test --verbose --validationmode dns-01 --validation script --source manual --emailaddress email@testdom.xx --accepttos `
 --dnsscript "C:\Programme\win-acme\Scripts\ispcDNS.ps1" `
 --dnscreatescriptarguments "create {RecordName} {Token} https://yourserver.xx:8080/remote/plugin_acmeapi.phpp xxxxxyourKeyxxxxxxxx" `
 --dnsdeletescriptarguments "delete {RecordName} {Token} https://yourserver.xx:8080/remote/plugin_acmeapi.php xxxxxyourKeyxxxxxxxx" `
 --host windows.testdom.xx `
 --store none
+```
 
-# real cert
+#### Production (Real Certificate)
+```powershell
 C:\Programme\win-acme\wacs.exe --verbose --validationmode dns-01 --validation script --source manual --emailaddress email@testdom.xx --accepttos `
 --dnsscript "C:\Programme\win-acme\Scripts\ispcDNS.ps1" `
 --dnscreatescriptarguments "create {RecordName} {Token} https://yourserver.xx:8080/remote/plugin_acmeapi.phpp xxxxxyourKeyxxxxxxxx" `
 --dnsdeletescriptarguments "delete {RecordName} {Token} https://yourserver.xx:8080/remote/plugin_acmeapi.php xxxxxyourKeyxxxxxxxx" `
 --host windows.testdom.xx `
---certificatestore My 
+--certificatestore My
 ```
-There are a lot of options for win-acme.
-[Docu](https://www.win-acme.com/manual/getting-started)
+
+---
+
+### Additional Resources
+
+win-acme offers many options and advanced configurations:  
+📘 [Official Documentation](https://www.win-acme.com/manual/getting-started)
+
+
+
+
+## Limits
+- `Multiple SANs in difference zones (like -d mail.domain1.xx -d mail.domain2.xx) not possible (need to modify certbot/acme.sh plugin scripts for this)`
+
+
+
 
 ---
 
